@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "88089649092",
+    "project_id": "my-database-project-dipesh",
+    "storage_bucket": "my-database-project-dipesh.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88089649092:android:f9abff8ba4e0384ef54e91",
+        "android_client_info": {
+          "package_name": "com.example.database_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQXvM54zKOGvzCoo1RT7zj2acWjOt1lJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
