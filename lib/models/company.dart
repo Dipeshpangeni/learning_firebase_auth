@@ -15,4 +15,22 @@ class Company {
       this.phonenumber,
       this.establishedAt,
       this.services});
+
+
+
+
+toJson()
+{
+  Map <String,dynamic>json ={};
+
+  json["id"]=id;
+  json["name"]=name;
+  json["address"]=address;
+  json["services"]=services;
+  json["establishedAt"]=establishedAt;
+  json["phonenumber"]=phonenumber;
+
+
+return json;
+}
 }

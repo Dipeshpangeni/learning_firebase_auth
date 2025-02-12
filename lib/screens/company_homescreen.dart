@@ -1,4 +1,5 @@
 import 'package:database_demo/models/company.dart';
+import 'package:database_demo/screens/add_company_screen.dart';
 import 'package:database_demo/screens/more.dart';
 import 'package:database_demo/services/firebase_db_services.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,13 @@ class CompanyHomescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => PersonAddScreen()));
+        },
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text("Company Home"),
         actions: [
@@ -34,24 +42,50 @@ class CompanyHomescreen extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Container(
-                        decoration: 
-                        BoxDecoration(border: Border.all( width: 1, color: Colors.white)),
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: Colors.white)),
                         child: ListTile(
-                          leading: Text(allCompanies[index].name!,style: TextStyle(fontSize: 17,color: Colors.red),),
+                          leading: Text(
+                            allCompanies[index].name!,
+                            style: TextStyle(fontSize: 17, color: Colors.red),
+                          ),
                           title: Column(
                             children: [
-                              Text(allCompanies[index].services.toString(),style: TextStyle(fontSize: 15,color: const Color.fromARGB(255, 241, 244, 54)),),
-                              Divider(color: Colors.teal,),
-                              Text(allCompanies[index].establishedAt.toString(),style: TextStyle(fontSize: 15,color: const Color.fromARGB(255, 9, 255, 0)),)
-                            ,Divider(height: 7,color: Colors.teal,),
-
+                              Text(
+                                allCompanies[index].services.toString(),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: const Color.fromARGB(
+                                        255, 241, 244, 54)),
+                              ),
+                              Divider(
+                                color: Colors.teal,
+                              ),
+                              Text(
+                                allCompanies[index].establishedAt.toString(),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color:
+                                        const Color.fromARGB(255, 9, 255, 0)),
+                              ),
+                              Divider(
+                                height: 7,
+                                color: Colors.teal,
+                              ),
                             ],
-                            
                           ),
-                          
-                          subtitle: Text(allCompanies[index].address!,style: TextStyle(fontSize: 15,color: const Color.fromARGB(255, 0, 255, 242)),),
+                          subtitle: Text(
+                            allCompanies[index].address!,
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: const Color.fromARGB(255, 0, 255, 242)),
+                          ),
                           trailing: PopupMenuButton(onSelected: (value) async {
                             if (value == "edit") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => PersonAddScreen()));
                             } else {
                               await FirebaseDbServices()
                                   .deletCompany(allCompanies[index].id!);
@@ -59,7 +93,15 @@ class CompanyHomescreen extends StatelessWidget {
                           }, itemBuilder: (context) {
                             return [
                               PopupMenuItem(
-                                child: Text("Edit"),
+                                child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  PersonAddScreen()));
+                                    },
+                                    child: Text("Edit")),
                                 value: 'Edit',
                               ),
                               PopupMenuItem(

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:database_demo/models/company.dart';
 
@@ -17,16 +16,15 @@ class FirebaseDbServices {
       List<Company> allCompanies = [];
 
       for (var document in allDocuments) {
-        String id =document.id;
+        String id = document.id;
         Map data = document.data() as Map;
         Company newCompany = Company(
-          id:id,
-            name: data['name'] ?? "No name provided",
-            address: data['address'] ?? "No address Given",
-            services: data['services']??[],
-            establishedAt: data['establistAt'],
-            );
-
+          id: id,
+          name: data['name'] ?? "No name provided",
+          address: data['address'] ?? "No address Given",
+          services: data['services'] ?? [],
+          establishedAt: data['establistAt'],
+        );
 
         allCompanies.add(newCompany);
       }
@@ -43,14 +41,29 @@ class FirebaseDbServices {
 // for (var doc in companyCollection.)
   }
 
-  deletCompany(String docId)async{
-
-await companyCollection.doc(docId).delete().then((value)=> print("successfuly deleted"))
-.onError((error, stackTrace) => print("error is $error and stack trace is $stackTrace"));
+  deletCompany(String docId) async {
+    await companyCollection
+        .doc(docId)
+        .delete()
+        .then((value) => print("successfuly deleted"))
+        .onError((error, stackTrace) =>
+            print("error is $error and stack trace is $stackTrace"));
   }
 
-  editCompany({Company? company}){
-
+  addCompany(Company company) async {
+    try {
+      await companyCollection.add(company.toJson());
+    } catch (e) {
+      print("error is $e");
+    }
   }
-  addCompany(){}
+
+  editCompany(Company company) async {
+try{
+  await companyCollection.doc(company.id).update(company.toJson());
+}                                                                                                                                                                                                                                                                  
+catch(e){
+  print("The error is $e");
+}
+  }
 }
